@@ -17,12 +17,43 @@
 		"lucee": {"minimum_version":"", "notes":"", "docs":"https://docs.lucee.org/reference/functions/ormexecutequery.html"},
 		"railo": {"minimum_version":"", "notes":"", "docs":"http://railodocs.org/index.cfm/function/ormexecutequery"}
 	},
+	"examples": [
+		{
+			"title":"HQL query syntax",
+			"description":"",
+			"code":"<cfscript>\n   employees = ormExecuteQuery(\"from Employees\");\n   employees = ormExecuteQuery(\"from Employees where age > 40\");\n   employeeObj = ormExecuteQuery(\"from Employees where EmployeeID =1\", true);\n   firstNameArray = ormExecuteQuery(\"select FirstName from Employees\");\n   numberOfEmps = ormExecuteQuery(\"select count(*) from Employees\");\n   firstName = ormExecuteQuery(\"select FirstName from Employees where EmployeeID = 1\", true);\n   employees = ormExecuteQuery(\"from Employees\", false, {offset=5, maxresults=10, timeout=5});\n</cfscript>",
+			"result":"",
+			"runnable":false
+		},
+		{
+			"title":"HQL query syntax with generic parameterized input",
+			"description":"",
+			"code":"<cfscript>\n    employees = ormExecuteQuery(\"from Employee where age > ?\", [40]);\n    employeeObj = ormExecuteQuery(\"from Employee where EmployeeID = ?\", [1], true);\n    employees = ormExecuteQuery(\"from Employee where age > ? and age < ?\", [40, 80]);\n</cfscript>",
+			"result":"",
+			"runnable":false
+		},
+		{
+			"title":"HQL query syntax with named parameter input",
+			"description":"",
+			"code":"<cfscript>\n   USEmployees = ormExecuteQuery(\"from Employee where country=:country and citizenship=:country\", {country='USA'});\n   orderDetail = ormExecuteQuery(\"from Orders where OrderID=:orderid and ProductID=:productid\", {orderid=1, productid=901}, true);\n</cfscript>",
+			"result":"",
+			"runnable":false
+		}
+	],
 	"links": [
 		{
 			"title": "Hibernate Query Language (HQL) Reference",
 			"description":"Official HQL Reference",
 			"url":"https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/queryhql.html"
+		},
+		{
+			"title": "CFML Reference - Hibernate Query Language (HQL) Methods",
+			"description":"HQL Methods",
+			"url":"https://helpx.adobe.com/coldfusion/cfml-reference/coldfusion-functions/functions-h-im/hqlmethods.html"
 		}
 	]
 
 }
+
+
+
